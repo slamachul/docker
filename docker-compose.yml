@@ -4,7 +4,21 @@ services:
     image: nginx:latest
     ports:
       - "80:80"
+    volumes:
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
   #php
   app:
     build:
       dockerfile: ./app/Dockerfile
+    volumes:
+      - ./app:/app
+  db:
+    image: mysql:8.0
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+valumes:
+    #leave docker where to pop this data from
+    mysqldata:
