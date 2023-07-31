@@ -1,24 +1,20 @@
+# 21:46
+# https://www.youtube.com/watch?v=qv-P_rPFw4c&t=374s
+# KD Admin
+# Ubuntu 22.04.1 LTS
+# PHP Version 7.3.33 fpm
+# Nginx 1.18
+# MySQL 8.0.33-0ubuntu0.22.04.2 for Linux on x86_64 ((Ubuntu))
+# docker compose up -d (runs docker compose in detached mode - console gives back control to user)
+# docker compose ps (displays a list of docker containers)
+# docker exec -it {containder name} sh (connect to particular container with shell console)
 services:
   #nginx
   web:
-    image: nginx:latest
+    image: nginx:1.18
     ports:
-      - "80:80"
-    volumes:
-      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
-  #php
-  app:
-    build:
-      dockerfile: ./app/Dockerfile
-    volumes:
-      - ./app:/app
-  db:
-    image: mysql:8.0
-    volumes:
-      - mysqldata:/var/lib/mysql
-    ports:
-      - "3306:3306"
+      - "8001:80"
 
-valumes:
-    #leave docker where to pop this data from
-    mysqldata:
+  kdadmin:
+    build:
+        dockerfile: ./kdadmin/Dockerfile
